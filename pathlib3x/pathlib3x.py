@@ -1006,6 +1006,12 @@ class Path(PurePath):
         """
         for name in os.listdir(self):
             yield self._make_child_relpath(name)
+    
+    def walk(self):
+        """Bound method for os.walk
+        """
+        for root, dirnames, filenames in os.walk(self):
+            yield self / root, dirnames, filenames
 
     def _scandir(self):
         # bpo-24132: a future version of pathlib will support subclassing of
